@@ -3,6 +3,7 @@ component extends="_tests.basetests.BaseSpecTest" {
 	function beforeAll() {
 		super.beforeAll();
 
+// https://github.com/mozilla/geckodriver/releases
 		var webDriverFilePathname = getDirectoryFromPath( getCurrentTemplatePath() ) & '../../../webdrivers/geckodriver-v0.16.1-macos';
 
 		var selenium = new cfselenium.SeleniumWebDriver(
