@@ -2,7 +2,7 @@
 <!--- CPU Integration --->
 <cfparam name="url.cpu" default="false">
 <!--- SETUP THE ROOTS OF THE BROWSER RIGHT HERE --->
-<cfset rootMapping 	= "/selenium/cfseleniumwebdriver/_tests/sut">
+<cfset rootMapping 	= "/selenium/CFSeleniumWebDriver/_tests/sut">
 <cfif directoryExists( rootMapping )>
 	<cfset rootPath = rootMapping>
 <cfelse>
