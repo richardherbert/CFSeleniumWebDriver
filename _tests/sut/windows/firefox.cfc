@@ -37,12 +37,12 @@ component extends="_tests.basetests.BaseSpecTest" {
 ////////////////////////////////////////////////////////////////////////////////
 // test browser
 ////////////////////////////////////////////////////////////////////////////////
-			it( title="...expect Google page title", body=function( data ) {
-				driver.get( 'https://www.google.com/' );
+			it( title="...expect documentation page title", body=function( data ) {
+				driver.get( 'https://richardherbert.github.io/CFSeleniumWebDriver/' );
 
 				pageTitle = driver.getTitle();
 
-				expect( pageTitle ).toBe( 'Google' );
+				expect( pageTitle ).toBe( 'CFSeleniumWebDriver' );
 			}, data={} );
 		});
 	}
