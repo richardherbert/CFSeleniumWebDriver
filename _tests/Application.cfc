@@ -4,6 +4,7 @@ component {
 	this.mappings[ '/testbox' ] = expandPath( '/' ) & '../testbox';
 	this.mappings[ '/_tests' ] = getDirectoryFromPath( getCurrentTemplatePath() );
 
+	this.mappings[ '/cfselenium' ] = getDirectoryFromPath( getCurrentTemplatePath() ) & '../';
 
-	// writedump(var='#this#', label='this', expand=1, abort=1, format='html');
+	this.javaSettings = { loadPaths = [ getDirectoryFromPath( getCurrentTemplatePath() ) & '../lib/selenium-server-standalone-3.4.0.jar' ] };
 }

@@ -2,16 +2,27 @@ component extends="_tests.basetests.BaseSpecTest" {
 // setup
 	function beforeAll() {
 		super.beforeAll();
+
+		var webDriverFilePathname = getDirectoryFromPath( getCurrentTemplatePath() ) & '../../../webdrivers/geckodriver-v0.16.1-win64.exe';
+
+		var selenium = new cfselenium.SeleniumWebDriver(
+			 driverType='firefox'
+			,webdriver=webDriverFilePathname
+		);
+
+		driver = selenium.getDriver();
 	}
 
 // teardown
 	function afterAll() {
 		super.afterAll();
+
+		driver.close();
 	}
 
 	function run( testResults, testBox ) {
 // suite...
-		describe( "Create User...", function() {
+		describe( "Test Firefox...", function() {
 			beforeEach( function( currentSpec ) {
 			});
 
@@ -23,25 +34,15 @@ component extends="_tests.basetests.BaseSpecTest" {
 			});
 
 ////////////////////////////////////////////////////////////////////////////////
-// post user
+// test browser
 ////////////////////////////////////////////////////////////////////////////////
-			it( title="...POST User (/users) with minimum payload", body=function( data ) {
-				expect( true ).toBeTrue();
-			}, data={} );
+			it( title="...expect Google page title", body=function( data ) {
+				driver.get( 'https://www.google.com/' );
 
-			it( title="...POST User (/users) with minimum payload plus new address", body=function( data ) {
-				expect( true ).toBeTrue();
-			}, data={} );
+				pageTitle = driver.getTitle();
 
-			it( title="...POST User (/users) with no payload", body=function( data ) {
-				expect( true ).toBeTrue();
+				expect( pageTitle ).toBe( 'Google' );
 			}, data={} );
-
-			describe( "Create User...", function() {
-				it( title="...POST User (/users) with no payload", body=function( data ) {
-					expect( true ).toBeTrue();
-				}, data={} );
-			});
 		});
 	}
 

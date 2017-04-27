@@ -1,39 +1,48 @@
 component extends="_tests.basetests.BaseSpecTest" {
 // setup
 	function beforeAll() {
-		// super.beforeAll();
+		super.beforeAll();
+
+		var webDriverFilePathname = getDirectoryFromPath( getCurrentTemplatePath() ) & '../../../webdrivers/geckodriver-v0.16.1-macos';
+
+		var selenium = new cfselenium.SeleniumWebDriver(
+			 driverType='firefox'
+			,webdriver=webDriverFilePathname
+		);
+
+		driver = selenium.getDriver();
 	}
 
 // teardown
 	function afterAll() {
-		// super.afterAll();
+		super.afterAll();
+
+		driver.close();
 	}
 
 	function run( testResults, testBox ) {
 // suite...
-		feature( "User", function() {
+		describe( "Test Firefox...", function() {
 			beforeEach( function( currentSpec ) {
 			});
 
 			afterEach( function( currentSpec ) {
 			});
 
-			aroundEach( function( spec, suite ) {
+			aroundEach( function( spec, suite ){
 				arguments.spec.body();
 			});
 
 ////////////////////////////////////////////////////////////////////////////////
-// post user
+// test browser
 ////////////////////////////////////////////////////////////////////////////////
-			scenario( "Create User", function() {
-				given( "I have entered a width of 20 and a height of 30 and a depth of 40...", function() {
-					when( "I run the calculation...", function() {
-						then( "the result should be 24000", function() {
-							expect( true ).toBeTrue();
-						});
-					});
-				});
-			});
+			it( title="...expect Google page title", body=function( data ) {
+				driver.get( 'https://www.google.com/' );
+
+				pageTitle = driver.getTitle();
+
+				expect( pageTitle ).toBe( 'Google' );
+			}, data={} );
 		});
 	}
 
