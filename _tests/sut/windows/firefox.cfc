@@ -18,7 +18,7 @@ component extends="_tests.basetests.BaseSpecTest" {
 	function afterAll() {
 		super.afterAll();
 
-		driver.quit();
+		driver.close();
 	}
 
 	function run( testResults, testBox ) {
