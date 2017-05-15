@@ -82,11 +82,11 @@
 	}
 
 	public WebElement function findElementByName( required string name, any by=getBy() ) {
-		return findElement( by.name(name) );
+		return findElement( by.name( name ) );
 	}
 
 	public WebElement function findElementById( required string id, any by=getBy() ) {
-		return findElement( by.id(id) );
+		return findElement( by.id( id ) );
 	}
 
 	public WebElement function findElementByXPath( required string xpath, any by=getBy() ) {
@@ -135,7 +135,7 @@
 	}
 
 // helper method when trying to find a specific element but has the same names and different values such as radio buttons
-	public webElement function findElementByNameAndValue( required string name, required string value, any by=getBy() ) {
+	public WebElement function findElementByNameAndValue( required string name, required string value, any by=getBy() ) {
 		local.elements = findElements( arguments.by.name( arguments.name ) );
 
 		return findElementByAttributeValue( "value", arguments.value, local.elements );
