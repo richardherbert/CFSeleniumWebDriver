@@ -9,6 +9,9 @@
 // this is the java selenium driver, not the CFC driver
 		variables.driver = driver;
 
+		variables.defaultWaitTimeout = 30000; // 30 seconds
+		variables.sessionID = '';
+
 		return this;
 	}
 
@@ -22,6 +25,24 @@
 
 	public void function quit() {
 		variables.driver.quit();
+	}
+
+	public void function wait( required numeric seconds) {
+		sleep( seconds * 1000 );
+
+		return;
+	}
+
+	public void function waitForElementVisible( required string type, required string value, numeric timeout=variables.defaultWaitTimeout ) {
+		var endTickCount = getTickCount() + arguments.timeout;
+
+		while ( NOT findElement( getBy()[ type ]( value ) ).isDisplayed() ) {
+			sleep( 100 );
+
+			if ( getTickCount() >= endTickCount ) {
+				throw ( type='elementNotFound', message='The element: #type#="#value#" was not found after #arguments.timeout/1000# seconds.' );
+			}
+		}
 	}
 
 	public any function executeScript() {
@@ -145,7 +166,7 @@
 		local.elements = [];
 		local.webElements = findElements( arguments.by.name( arguments.name ) );
 
-		for( local.i = 1; local.i <= arrayLen( webElements ); local.i++ ){
+		for( local.i = 1; local.i <= arrayLen( webElements ); local.i++ ) {
 			arrayAppend( local.elements, createObject( 'component', 'WebElement' ).init( local.webElements[ local.i ] ) );
 		}
 
@@ -156,7 +177,7 @@
 		local.elements = [];
 		local.webElements = variables.driver.findElements( variables.by.xPath( arguments.xpath ) );
 
-		for( local.i = 1; local.i <= arrayLen( webElements ); local.i++ ){
+		for( local.i = 1; local.i <= arrayLen( webElements ); local.i++ ) {
 			arrayAppend( local.elements, createObject( 'component', 'WebElement' ).init( local.webElements[ local.i ] ) );
 		}
 
@@ -176,7 +197,7 @@
 	}
 
 // TODO - need to revisit this one
-	public any function navigate( location ){
+	public any function navigate( location ) {
 // throwNotImplementedException("navigate ... not sure best how to implement this");
 		variables.driver.get( location );
 //org.openqa.selenium.WebDriver$Navigation
@@ -213,7 +234,7 @@
 
 
 // TODO - revisit - has a return value not implemented
-	public void function manage(){
+	public void function manage() {
 		throwNotImplementedException( 'manage' );
 //org.openqa.selenium.WebDriver$Options
 	}
