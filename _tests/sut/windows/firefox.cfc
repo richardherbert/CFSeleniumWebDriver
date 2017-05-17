@@ -71,6 +71,25 @@ component extends="_tests.basetests.BaseSpecTest" {
 				expect( element.getAttribute( 'title' ) ).toBe( 'Test Subject' );
 				expect( element.getAttribute( 'href' ) ).toBe( 'https://richardherbert.github.io/CFSeleniumWebDriver/test-subject' );
 			}, data={} );
+
+			it( title="...navigate to a new page by the text of a link", body=function( data ) {
+				driver.get( 'https://richardherbert.github.io/CFSeleniumWebDriver/' );
+
+				element = driver.findElementByLinkText( 'Test Subject' );
+
+				element.click();
+				// driver.findElement( 'id="helloTitle"' );
+
+
+				// sleep( 3000 );
+
+
+				driver.waitForElementVisible( 'id', 'helloTitle', 2000 );
+
+				pageTitle = driver.getTitle();
+
+				expect( pageTitle ).toBe( 'CFSeleniumWebDriver | Test Subject' );
+			}, data={} );
 		});
 	}
 
