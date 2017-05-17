@@ -77,7 +77,15 @@
 	function getLocation() {} //}ava.awt.Point
 	function getSize() {} //}java.awt.Dimension
 	function getValueOfCssProperty(css){} //}(java.lang.String) java.lang.String
-	function isDisplayed() {} //}boolean
+	function isDisplayed() {
+		try {
+			var isDisplayed = variables.webElement.isDisplayed();
+
+			return true;
+		} catch( any exception ) {
+			return false;
+		}
+	}
 
 	// DEPRECATED --------------------------------
 	// toggle
